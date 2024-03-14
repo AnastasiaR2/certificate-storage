@@ -13,6 +13,7 @@
   margin-top: 50px;
 }
 
-.certContainer {
-  width: 600px;
+.certList {
+  width: 400px;
+  border: 1px solid black;
 }

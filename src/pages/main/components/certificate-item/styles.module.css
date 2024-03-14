@@ -1,1 +1,17 @@
-.item {}
+.item {
+  display: flex;
+  height: 40px;
+  align-items: center;
+  padding-left: 10px;
+  cursor: pointer;
+  justify-content: space-between;
+}
+
+.item:not(:last-child) {
+  border-bottom: 1px solid black;
+}
+
+.selected {
+  background-color: #ebebeb;
+  cursor: default;
+}

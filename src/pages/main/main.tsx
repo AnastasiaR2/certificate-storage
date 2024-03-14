@@ -2,23 +2,25 @@ import { type CertificateJson } from 'pkijs';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { AppRoute, CertificateInfo } from '@/common/enums/enums.js';
-import {
-  getCertificateInfo,
-  getCertificatesFromLocalStorage,
-} from '@/common/helpers/helpers.js';
+import { AppRoute } from '@/common/enums/enums.js';
+import { getCertificatesFromLocalStorage } from '@/common/helpers/helpers.js';
 
-import { CertificateItem } from './components/components.js';
+import { CertificateInfo, CertificateItem } from './components/components.js';
 import styles from './styles.module.css';
 
 const Main: React.FC = () => {
   const [certificates, setCertificates] = useState<CertificateJson[]>([]);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   useEffect(() => {
     const certificatesFromLocalStorage = getCertificatesFromLocalStorage();
     console.log(certificatesFromLocalStorage);
     setCertificates(certificatesFromLocalStorage);
   }, []);
+
+  const handleCertificateClick = (index: number): void => {
+    setSelectedIndex(index);
+  };
 
   return (
     <>
@@ -29,18 +31,20 @@ const Main: React.FC = () => {
         {certificates.length === 0 ? (
           <p className={styles.placeholderText}>Нема жодного сертифікату</p>
         ) : (
-          <ul>
+          <ul className={styles.certList}>
             {certificates.map((item, index) => (
               <CertificateItem
                 certificate={item}
                 key={item.serialNumber.valueBlock.valueHex}
+                isSelected={index === selectedIndex}
                 index={index}
+                onClick={handleCertificateClick}
               />
             ))}
           </ul>
         )}
       </div>
-      <div className={styles.certContainer}></div>
+      <CertificateInfo />
     </>
   );
 };
