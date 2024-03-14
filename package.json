@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "lint:js": "npx tsc --noEmit && npx eslint \"**/*.{ts,tsx}\" --max-warnings=0",
+    "lint:css": "npx stylelint \"src/**/*.css\"",
     "lint:prettify": "prettier --check \"**/*.{ts,tsx,json,md,scss,html}\"",
-    "lint": "npm run lint:js && npm run lint:prettify",
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:prettify",
     "prettify": "prettier --write \"**/*.{ts,tsx,json,md,scss,html}\"",
+    "fix:css": "npx stylelint --fix \"src/**/*.css\"",
     "dev": "vite",
     "build": "tsc --build --clean && vite build",
     "preview": "vite preview"
@@ -37,6 +39,9 @@
     "eslint-plugin-sonarjs": "^0.24.0",
     "eslint-plugin-unicorn": "^51.0.1",
     "prettier": "^3.2.5",
+    "stylelint": "^16.2.1",
+    "stylelint-config-recess-order": "^5.0.0",
+    "stylelint-config-standard": "^36.0.0",
     "typescript": "^5.2.2",
     "typescript-plugin-css-modules": "^5.1.0",
     "vite": "^5.1.6",

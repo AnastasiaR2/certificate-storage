@@ -1,6 +1,6 @@
 .layout {
   display: flex;
+  gap: 50px;
   justify-content: center;
   padding: 45px;
-  gap: 50px;
 }

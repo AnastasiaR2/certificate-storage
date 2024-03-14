@@ -1,10 +1,10 @@
 .infoBlock {
   width: 450px;
   height: 300px;
-  border: 1px solid black;
   padding: 15px;
   padding-left: 30px;
   font-size: 1.1rem;
+  border: 1px solid black;
 }
 
 .infoList {
@@ -15,8 +15,8 @@
 
 .infoList li {
   overflow: hidden;
-  white-space: nowrap;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .infoList li span {
