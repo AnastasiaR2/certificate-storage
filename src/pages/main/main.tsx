@@ -10,11 +10,10 @@ import styles from './styles.module.css';
 
 const Main: React.FC = () => {
   const [certificates, setCertificates] = useState<CertificateJson[]>([]);
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
   useEffect(() => {
     const certificatesFromLocalStorage = getCertificatesFromLocalStorage();
-    console.log(certificatesFromLocalStorage);
     setCertificates(certificatesFromLocalStorage);
   }, []);
 
@@ -44,7 +43,11 @@ const Main: React.FC = () => {
           </ul>
         )}
       </div>
-      <CertificateInfo />
+      {certificates.length === 0 ? (
+        <div className={styles.placeholderBlock}></div>
+      ) : (
+        <CertificateInfo certificate={certificates[selectedIndex]} />
+      )}
     </>
   );
 };

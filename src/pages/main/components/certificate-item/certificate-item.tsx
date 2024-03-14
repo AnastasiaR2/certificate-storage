@@ -31,7 +31,7 @@ const CertificateItem: React.FC<Properties> = ({
       className={getValidClassNames(styles.item, isSelected && styles.selected)}
       onClick={handleClick}
     >
-      {getCertificateCommonName(certificate, CertificateNames.SUBJECT)}
+      <p>{getCertificateCommonName(certificate, CertificateNames.SUBJECT)}</p>
       {isSelected && <ArrowIcon />}
     </li>
   );

@@ -2,4 +2,23 @@
   width: 450px;
   height: 300px;
   border: 1px solid black;
+  padding: 15px;
+  padding-left: 30px;
+  font-size: 1.1rem;
+}
+
+.infoList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.infoList li {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.infoList li span {
+  font-weight: bold;
 }
