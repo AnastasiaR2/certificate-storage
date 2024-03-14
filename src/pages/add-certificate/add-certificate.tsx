@@ -1,10 +1,12 @@
+import { type CertificateJson } from 'pkijs';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { AppRoute } from '@/common/enums/enums.js';
-import { getParsedCertificate } from '@/common/helpers/helpers.js';
-import { saveCertificateToLocalStorage } from '@/common/helpers/save-certificate-to-local-storage.helper.js';
-import { type CertificateJson } from '@/common/types/types.js';
+import {
+  getParsedCertificate,
+  saveCertificatesToLocalStorage,
+} from '@/common/helpers/helpers.js';
 
 import styles from './styles.module.css';
 
@@ -13,7 +15,7 @@ const AddCertificate: React.FC = () => {
   const [certificates, setCertificates] = useState<CertificateJson[]>([]);
 
   useEffect(() => {
-    saveCertificateToLocalStorage(certificates);
+    saveCertificatesToLocalStorage(certificates);
   }, [certificates]);
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>): void => {
@@ -37,10 +39,7 @@ const AddCertificate: React.FC = () => {
     try {
       const certificate = await file.arrayBuffer();
       const parsedCertificate = getParsedCertificate(certificate);
-      setCertificates((prevCertificates) => [
-        ...prevCertificates,
-        parsedCertificate,
-      ]);
+      setCertificates([...certificates, parsedCertificate]);
     } catch (error) {
       console.log(error);
     }
