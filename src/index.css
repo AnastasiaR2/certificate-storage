@@ -16,3 +16,8 @@ button {
   cursor: pointer;
   font: inherit;
 }
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
