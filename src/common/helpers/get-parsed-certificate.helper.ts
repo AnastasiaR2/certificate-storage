@@ -6,7 +6,7 @@ const getParsedCertificate = (
 ): CertificateJson => {
   const asn1 = fromBER(certificate);
   if (asn1.offset === -1) {
-    throw new Error('Incorrect encoded ASN.1 data');
+    throw new Error('Помилка: Неправильна структура сертифікату');
   }
 
   return new Certificate({ schema: asn1.result }).toJSON();

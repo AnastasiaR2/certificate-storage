@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { AppRoute } from '@/common/enums/enums.js';
@@ -9,14 +9,18 @@ import {
 
 import styles from './styles.module.css';
 
+const SUCCESS_MESSAGE = 'Сертифікат успішно завантажено';
+
 const AddCertificate: React.FC = () => {
-  // const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>): void => {
     event.preventDefault();
-    const files = event.dataTransfer.files;
-    handleFileUpload(files);
+    const files = event?.dataTransfer?.files;
+    if (files) {
+      handleFileUpload(files);
+    }
   };
 
   const handleFileChange = (
@@ -38,8 +42,11 @@ const AddCertificate: React.FC = () => {
       const certificate = await file.arrayBuffer();
       const parsedCertificate = getParsedCertificate(certificate);
       saveCertificateToLocalStorage(parsedCertificate);
+      setMessage(SUCCESS_MESSAGE);
     } catch (error) {
-      console.log(error);
+      if (error instanceof Error) {
+        setMessage(error.message);
+      }
     }
   };
 
@@ -49,6 +56,20 @@ const AddCertificate: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    const preventDefault = (event: DragEvent): void => {
+      event.preventDefault();
+    };
+
+    document.addEventListener('dragover', preventDefault);
+    document.addEventListener('drop', preventDefault);
+
+    return () => {
+      document.removeEventListener('dragover', preventDefault);
+      document.removeEventListener('drop', preventDefault);
+    };
+  }, []);
+
   return (
     <>
       <div className={styles.backBtnContainer}>
@@ -56,7 +77,11 @@ const AddCertificate: React.FC = () => {
           <button className={styles.backBtn}>Назад</button>
         </NavLink>
       </div>
-      <div className={styles.dragDropArea}>
+      <div
+        onDrop={handleDrop}
+        onDragOver={(e) => e.preventDefault()}
+        className={styles.dragDropArea}
+      >
         <p>Перетягніть файл сертифікату сюди</p>
         <p>або</p>
         <input
@@ -72,8 +97,8 @@ const AddCertificate: React.FC = () => {
             Виберіть через стандартний діалог
           </button>
         </label>
+        {message && <div>{message}</div>}
       </div>
-      {/* {errorMessage && <div>{errorMessage}</div>} */}
     </>
   );
 };
