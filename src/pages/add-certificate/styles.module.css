@@ -1,8 +1,36 @@
-.addBtn {
+.backBtnContainer {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.backBtn {
   width: 150px;
   height: 40px;
 }
 
-.certContainer {
-  width: 600px;
+.fileInput {
+  display: none;
+}
+
+.fileInputBtn {
+  height: 40px;
+  padding: 0 40px;
+}
+
+.dragDropArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 450px;
+  height: 300px;
+  border: 1px dashed black;
+  padding-top: 70px;
+}
+
+.dragDropArea p:first-child {
+  margin: 0;
+  line-height: 0;
 }
