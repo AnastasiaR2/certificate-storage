@@ -10,8 +10,19 @@ const getCertificatesFromLocalStorage = (): CertificateJson[] => {
 };
 
 const saveCertificateToLocalStorage = (certificate: CertificateJson): void => {
-  const existingCertificates = getCertificatesFromLocalStorage();
-  const updatedCertificates = [...existingCertificates, certificate];
+  const oldCertificates = getCertificatesFromLocalStorage();
+  const isCertificateExists = oldCertificates.some((oldCertificate) => {
+    return (
+      oldCertificate.serialNumber.valueBlock.valueHex ===
+      certificate.serialNumber.valueBlock.valueHex
+    );
+  });
+
+  if (isCertificateExists) {
+    throw new Error('Сертифікат з таким серійним номером вже доданий');
+  }
+
+  const updatedCertificates = [...oldCertificates, certificate];
   localStorage.setItem(CERTIFICATES_KEY, JSON.stringify(updatedCertificates));
 };
 
