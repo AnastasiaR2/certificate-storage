@@ -1,8 +1,8 @@
 .backBtnContainer {
-  width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 400px;
 }
 
 .backBtn {
@@ -21,11 +21,11 @@
 }
 
 .dragDropArea {
-  text-align: center;
   width: 450px;
   height: 300px;
-  border: 1px dashed black;
   padding-top: 130px;
+  text-align: center;
+  border: 1px dashed black;
 }
 
 .dragDropArea p:first-child {

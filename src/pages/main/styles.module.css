@@ -1,8 +1,8 @@
 .addCertContainer {
-  width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 400px;
 }
 
 .addBtn {
