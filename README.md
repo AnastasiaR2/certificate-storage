@@ -1,6 +1,6 @@
 # Certificate storage
 
-Certificate storage in a browser on JavaScript.
+Certificate storage in a browser on TypeScript.
 
 ## Tech Stack
 
